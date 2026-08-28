@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Multi-Agent AI Interview Panel Simulator
 
 An enterprise-grade, distributed Multi-Agent AI Interview Panel Simulator that orchestrates 4 distinct AI evaluators through independent transcript evaluations, a structured multi-round debate arena, and evidence-grounded non-averaged consensus synthesis.
@@ -139,3 +140,6 @@ Test Coverage includes:
 ## License
 MIT License. Built for the PromptWars Multi-Agent AI Benchmark.
 
+=======
+# DekhKrForm
+>>>>>>> 3641b4e3fd8058e8b1415a152f66105e10457814
