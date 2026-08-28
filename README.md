@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Multi-Agent AI Interview Panel Simulator
 
 An enterprise-grade, distributed Multi-Agent AI Interview Panel Simulator that orchestrates 4 distinct AI evaluators through independent transcript evaluations, a structured multi-round debate arena, and evidence-grounded non-averaged consensus synthesis.
@@ -74,45 +73,46 @@ An enterprise-grade, distributed Multi-Agent AI Interview Panel Simulator that o
 
 ---
 
-## Quickstart & Running the Application
+## QUICK START
 
-### 1. Prerequisites
-- Python 3.11+
-- Virtual environment (recommended)
-
-### 2. Installation
+### 1. Install Dependencies
 ```bash
-# Clone the repository
-git clone https://github.com/promptwars/interview-panel-simulator.git
-cd interview-panel-simulator
-
-# Install dependencies
 pip install -r backend/requirements.txt
-pip install pytest-asyncio
 ```
 
-### 3. Environment Setup (Optional for Live Gemini API)
+### 2. Configure Environment Variables (Optional)
 ```bash
-cp .env.example .env
-# Edit .env and supply GEMINI_API_KEY if desired:
-# GEMINI_API_KEY=your_key_here
-```
-*Note: If no API key is provided, the simulator runs with its built-in high-fidelity domain simulator for full offline testing and demonstration.*
+# Windows PowerShell
+$env:GEMINI_API_KEY="your_api_key_here"   # Optional: for live Gemini LLM calls
 
-### 4. Start the Application Server
-```bash
-$env:PYTHONPATH="backend"
-python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+# Linux / macOS
+export GEMINI_API_KEY="your_api_key_here" # Optional: for live Gemini LLM calls
 ```
-Open your browser at: **`http://localhost:8000`**
+> **Offline Demo Mode**: If no API key is supplied, the simulator automatically runs in full offline heuristic mode using grounded domain benchmarks with zero external API dependencies.
+
+### 3. Start the Backend Server
+```bash
+# Windows PowerShell
+$env:PYTHONPATH="backend"; python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+
+# Linux / macOS
+PYTHONPATH=backend python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+```
+
+### 4. Open the Website
+Open your browser and navigate to:
+**`http://localhost:8000/`** (or **`http://127.0.0.1:8000/`**)
 
 ---
 
 ## Running Automated Tests
 
 ```bash
-$env:PYTHONPATH="backend"
-python -m pytest tests/ -v
+# Windows PowerShell
+$env:PYTHONPATH="backend"; python -m pytest tests/ -v
+
+# Linux / macOS
+PYTHONPATH=backend python -m pytest tests/ -v
 ```
 
 Test Coverage includes:
@@ -140,6 +140,3 @@ Test Coverage includes:
 ## License
 MIT License. Built for the PromptWars Multi-Agent AI Benchmark.
 
-=======
-# DekhKrForm
->>>>>>> 3641b4e3fd8058e8b1415a152f66105e10457814

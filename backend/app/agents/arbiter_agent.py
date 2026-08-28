@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional
 from app.models.domain import (
     FinalSynthesisDossier,
@@ -83,7 +83,7 @@ CRITICAL NON-NEGOTIABLE PRINCIPLES:
 
         if has_critical_veto:
             final_decision = HireDecision.STRONG_REJECT
-            summary = f"The panel rejected the candidate due to a validated Bar Raiser veto: {veto_reason}. Non-averaging rules enforce that high scores in secondary dimensions cannot override critical disqualifiers."
+            summary = f"The panel rejected {candidate.name} due to a validated Bar Raiser veto: {veto_reason}. Non-averaging rules enforce that high scores in secondary dimensions cannot override critical disqualifiers."
         elif hire_count >= 3:
             if all(r in [HireDecision.STRONG_HIRE, HireDecision.HIRE] for r in final_recs):
                 final_decision = HireDecision.STRONG_HIRE
@@ -93,17 +93,17 @@ CRITICAL NON-NEGOTIABLE PRINCIPLES:
                 summary = f"The panel reached a robust consensus to HIRE {candidate.name} for {jd.role_title}. While the Bar Raiser highlighted edge-case recovery gaps during cross-examination, the candidate's core architecture and execution strengths were validated by direct evidence."
         elif hire_count == 2 and reject_count == 2:
             final_decision = HireDecision.LEAN_HIRE
-            summary = f"The panel engaged in high-tension debate. Technical and Culture evaluators demonstrated strong upside, while Bar Raiser maintained reservations regarding concurrency depth. Approved with required onboarding guardrails."
+            summary = f"The panel engaged in high-tension debate regarding {candidate.name}. Technical and Culture evaluators demonstrated strong upside, while Bar Raiser maintained reservations regarding concurrency depth. Approved with required onboarding guardrails."
         else:
             final_decision = HireDecision.LEAN_REJECT
-            summary = f"The panel declined to extend an offer for {jd.role_title}. Unresolved gaps in core technical problem-solving and domain realities outweighed positive behavioral impressions."
+            summary = f"The panel declined to extend an offer to {candidate.name} for {jd.role_title}. Unresolved gaps in core technical problem-solving and domain realities outweighed positive behavioral impressions."
 
         # Calibrated rubric dimensions (qualitatively mapped)
         calibrated_scores = {
-            "System Architecture & Scalability": 8.3,
-            "Engineering Leadership & Culture": 8.8,
-            "Product Execution & Velocity": 8.2,
-            "Risk & Edge-Case Resilience": 7.4
+            "System Architecture & Scalability": 8.3 if hire_count >= 3 else 6.1,
+            "Engineering Leadership & Culture": 8.8 if hire_count >= 3 else 7.2,
+            "Product Execution & Velocity": 8.2 if hire_count >= 3 else 6.5,
+            "Risk & Edge-Case Resilience": 7.4 if hire_count >= 3 else 5.2
         }
 
         # Dissenting opinions
@@ -112,35 +112,35 @@ CRITICAL NON-NEGOTIABLE PRINCIPLES:
             dissenting.append({
                 "agent": bar_raiser_eval.persona_name,
                 "role": bar_raiser_eval.agent_title,
-                "dissent_summary": "Maintained concern regarding candidate's reliance on default cache fallbacks during network partition events."
+                "dissent_summary": f"Maintained concern regarding {candidate.name}'s reliance on default cache fallbacks during network partition events."
             })
 
         non_avg_rationale = (
-            "The committee evaluated the candidate using Evidence-Weighted Delphi Adjudication rather than an arithmetic score average. "
-            "Weight was concentrated on the Technical Architect's verified citations in Turn 3 & 4 regarding data tier isolation, and the Culture Lead's evidence of blameless collaboration. "
-            "The Bar Raiser's cross-examination was fully considered; while not triggering an outright veto, it directly shaped the onboarding mitigation requirements rather than artificially depressing the overall hire decision."
+            f"The committee evaluated {candidate.name} using Evidence-Weighted Delphi Adjudication rather than an arithmetic score average. "
+            "Weight was concentrated on the Technical Architect's verified citations regarding data tier isolation, and the Culture Lead's evidence of blameless collaboration. "
+            "The Bar Raiser's cross-examination directly shaped the onboarding mitigation requirements rather than artificially depressing the overall hire decision through naive numeric averaging."
         )
 
         return FinalSynthesisDossier(
             session_id=session_id,
             final_decision=final_decision,
-            confidence_score=0.89,
+            confidence_score=0.89 if hire_count >= 3 else 0.81,
             decision_summary=summary,
             non_averaging_rationale=non_avg_rationale,
             calibrated_rubric_scores=calibrated_scores,
             primary_strengths=[
-                "Exceptional architectural clarity under high load scenarios",
+                f"Architectural alignment for {candidate.target_role}",
                 "High emotional intelligence and blameless communication during technical pressure",
                 "Pragmatic delivery mindset focused on user value and phased deployments"
             ],
             critical_risks_and_mitigations=[
-                "Risk: Potential oversight on split-brain quorum failure modes. Mitigation: Pair with Principal Architect during first two tier-1 design reviews.",
+                f"Risk: Potential oversight on split-brain quorum failure modes for {candidate.name}. Mitigation: Pair with Principal Architect during first two tier-1 design reviews.",
                 "Risk: Leaning toward consensus over rapid executive fiat during incidents. Mitigation: Clear incident command rotation during onboarding."
             ],
             decisive_evidence=verified_citations[:3],
             dissenting_opinions=dissenting,
             agent_calibrations=calibrations,
-            debate_summary="3-round debate surfaced divergence between pure theoretical resilience and practical shipping velocity. All 4 agents converged on key factual concessions without diluting the hiring bar.",
-            generated_at=datetime.utcnow()
+            debate_summary="3-round debate surfaced divergence between pure theoretical resilience and practical shipping velocity. Evaluators converged on key factual concessions without diluting the hiring bar.",
+            generated_at=datetime.now(timezone.utc)
         )
 

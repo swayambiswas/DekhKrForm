@@ -1,5 +1,5 @@
 import pytest
-from datetime import datetime
+from datetime import datetime, timezone
 from app.models.domain import (
     CandidateProfile,
     JobDescription,
@@ -21,17 +21,18 @@ def base_context():
         target_role="Staff Distributed Systems Engineer",
         target_level="L6",
         experience_years=10,
-        resume_summary="Staff engineer"
+        resume_summary="Experienced distributed systems engineer",
+        key_skills=["Kafka", "Raft", "Distributed Storage"]
     )
     jd = JobDescription(
         role_title="Staff Distributed Systems Engineer",
         level="L6",
-        team="Platform",
-        core_responsibilities=["Architecture"],
-        required_skills=["Distributed Systems"]
+        team="Cloud Infrastructure",
+        core_responsibilities=["Architect distributed storage"],
+        required_skills=["Distributed Systems", "Raft"]
     )
     turns = [
-        TranscriptTurn(turn_id=1, speaker="Interviewer", text="Tell us about your architecture."),
+        TranscriptTurn(turn_id=1, speaker="Interviewer", text="Tell us about Raft."),
         TranscriptTurn(turn_id=2, speaker="Candidate", text="I designed the multi-region storage layer using Raft.")
     ]
     return cand, jd, turns
@@ -41,7 +42,7 @@ async def test_non_averaging_bar_raiser_veto(base_context):
     cand, jd, turns = base_context
     engine = SynthesisEngine()
 
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     # 3 Agents gave HIRE/STRONG_HIRE, but Bar Raiser gave STRONG_REJECT with fatal red flag
     evaluations = {
         "technical_architect": IndependentEvaluation(
