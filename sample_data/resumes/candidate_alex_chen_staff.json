@@ -1,0 +1,15 @@
+{
+  "name": "Alex Chen",
+  "target_role": "Staff Distributed Systems Engineer",
+  "target_level": "L6",
+  "experience_years": 10,
+  "resume_summary": "Former Staff Infrastructure Engineer at ScaleMesh. Led design and migration of global distributed message broker handling 2M+ ops/sec with 99.999% SLA.",
+  "key_skills": [
+    "Distributed Storage",
+    "Kafka / Event Streaming",
+    "Raft Consensus",
+    "Go",
+    "Kubernetes / Service Mesh"
+  ]
+}
+

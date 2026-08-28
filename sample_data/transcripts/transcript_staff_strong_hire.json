@@ -1,0 +1,51 @@
+[
+  {
+    "turn_id": 1,
+    "speaker": "Interviewer",
+    "timestamp_start": "00:01:10",
+    "text": "Welcome Alex! Let's start with a design for a globally distributed write-heavy audit logging pipeline at 500k ops/sec."
+  },
+  {
+    "turn_id": 2,
+    "speaker": "Candidate",
+    "timestamp_start": "00:01:45",
+    "text": "Great challenge. To handle 500k ops/sec write throughput without single-leader write lock contention, I'd decouple write ingestion from persistence using partitioned Kafka topics sharded by tenant and event-hash."
+  },
+  {
+    "turn_id": 3,
+    "speaker": "Interviewer",
+    "timestamp_start": "00:04:12",
+    "text": "How do you ensure exactly-once semantics and avoid data loss during a cluster partition?"
+  },
+  {
+    "turn_id": 4,
+    "speaker": "Candidate",
+    "timestamp_start": "00:04:50",
+    "text": "In distributed storage, CAP dictates choosing between consistency and availability. For audit logs, durability and ordering are non-negotiable. I would configure Kafka with acks=all, min.insync.replicas=2, and assign monotonic sequence numbers per partition to enable idempotent consumer deduplication at the stateful storage tier."
+  },
+  {
+    "turn_id": 5,
+    "speaker": "Interviewer",
+    "timestamp_start": "00:08:20",
+    "text": "Tell me about a time you led a team through a significant technical disagreement."
+  },
+  {
+    "turn_id": 6,
+    "speaker": "Candidate",
+    "timestamp_start": "00:09:00",
+    "text": "When debating between GraphQL and gRPC for internal mesh communication, opinions were entrenched. Rather than enforcing top-down authority, I created a blameless benchmarking spike where each team measured latency, payload size, and developer ergonomic velocity. We aligned on gRPC for internal mesh and GraphQL at the edge gateway."
+  },
+  {
+    "turn_id": 7,
+    "speaker": "Interviewer",
+    "timestamp_start": "00:13:15",
+    "text": "What happens when your primary database encounters split-brain quorum failure?"
+  },
+  {
+    "turn_id": 8,
+    "speaker": "Candidate",
+    "timestamp_start": "00:14:02",
+    "text": "We must rely on an odd-numbered Raft or Paxos quorum coordinator. If a network partition isolates a minority node, it immediately steps down from leader writes and rejects mutations with backpressure."
+  }
+]
+

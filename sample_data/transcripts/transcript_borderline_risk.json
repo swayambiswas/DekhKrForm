@@ -1,0 +1,51 @@
+[
+  {
+    "turn_id": 1,
+    "speaker": "Interviewer",
+    "timestamp_start": "00:01:00",
+    "text": "David, can you describe how you designed your multi-datacenter distributed caching system?"
+  },
+  {
+    "turn_id": 2,
+    "speaker": "Candidate",
+    "timestamp_start": "00:01:30",
+    "text": "Sure, we deployed Redis Sentinel across three global regions. It easily supported 50 million daily active users with sub-millisecond lookups."
+  },
+  {
+    "turn_id": 3,
+    "speaker": "Interviewer",
+    "timestamp_start": "00:04:10",
+    "text": "How did you manage cross-region replication lag and avoid stale reads during network degradation between US-East and EU-West?"
+  },
+  {
+    "turn_id": 4,
+    "speaker": "Candidate",
+    "timestamp_start": "00:04:45",
+    "text": "Honestly Redis handles replication asynchronously out of the box, so we didn't really have to write custom conflict resolution logic. We just assumed Redis Sentinel would handle it."
+  },
+  {
+    "turn_id": 5,
+    "speaker": "Interviewer",
+    "timestamp_start": "00:07:30",
+    "text": "What happened if a network partition occurred while a client wrote to a minority partition?"
+  },
+  {
+    "turn_id": 6,
+    "speaker": "Candidate",
+    "timestamp_start": "00:08:05",
+    "text": "I think the client just retried. We didn't experience any major data drift that I was aware of, because the DevOps team maintained the network switches."
+  },
+  {
+    "turn_id": 7,
+    "speaker": "Interviewer",
+    "timestamp_start": "00:11:15",
+    "text": "Can you elaborate on your specific personal code contribution vs what was configured by the infrastructure platform team?"
+  },
+  {
+    "turn_id": 8,
+    "speaker": "Candidate",
+    "timestamp_start": "00:12:00",
+    "text": "Well, my team mostly wrote the REST wrapper endpoints in Java Spring Boot that made the Redis calls. The underlying cluster configuration was mostly set up by another team before I joined."
+  }
+]
+

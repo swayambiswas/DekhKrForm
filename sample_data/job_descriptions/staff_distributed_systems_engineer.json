@@ -1,0 +1,23 @@
+{
+  "role_title": "Staff Distributed Systems Engineer",
+  "level": "L6",
+  "team": "Cloud Infrastructure & Data Engine",
+  "core_responsibilities": [
+    "Architect and deliver global multi-region active-active storage engine",
+    "Lead incident post-mortems and enforce high operational reliability bars",
+    "Mentor senior engineers and represent engineering in cross-org design reviews"
+  ],
+  "required_skills": [
+    "Distributed Systems (Raft, Paxos, Consensus)",
+    "High Throughput Ingestion & Storage Sharding",
+    "Go / Rust / C++",
+    "System Design & Failure Mode Analysis"
+  ],
+  "evaluation_criteria": {
+    "Technical Depth": "Demonstrated mastery of distributed consensus, split-brain recovery, and data isolation.",
+    "Cultural Leadership": "High ownership, blameless incident culture, and empathetic mentorship.",
+    "Execution Pragmatism": "Balancing long-term architectural purity with business release milestones.",
+    "Bar Raiser Rigor": "Depth of personal contribution, absence of unverified hand-waving."
+  }
+}
+

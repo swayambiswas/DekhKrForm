@@ -1,0 +1,14 @@
+{
+  "name": "David Vance",
+  "target_role": "Staff Distributed Systems Engineer",
+  "target_level": "L6",
+  "experience_years": 8,
+  "resume_summary": "Senior Software Engineer claiming sole architecture of multi-datacenter distributed cache system serving 50M DAU.",
+  "key_skills": [
+    "Redis",
+    "Java",
+    "Distributed Caching",
+    "Microservices"
+  ]
+}
+
