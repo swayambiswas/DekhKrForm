@@ -34,52 +34,55 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white">
 
+  <!-- Screen Reader Live Announcements -->
+  <div id="a11yAnnouncer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
   <!-- Top Navigation Bar -->
-  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40" role="banner">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-          <i data-lucide="users" class="w-5 h-5 text-white"></i>
+        <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/20" aria-hidden="true">
+          <i data-lucide="users" class="w-5 h-5 text-white" aria-hidden="true"></i>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <h1 class="text-base font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-300">
+            <h1 class="text-base font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-200">
               Multi-Agent AI Interview Panel Simulator
             </h1>
-            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-indigo-950 text-indigo-300 border border-indigo-800">
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-indigo-950 text-indigo-200 border border-indigo-700">
               Delphi Consensus
             </span>
           </div>
-          <p class="text-xs text-slate-400 font-medium flex items-center gap-1.5">
-            <span id="wsStatusDot" class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <p class="text-xs text-slate-300 font-medium flex items-center gap-1.5">
+            <span id="wsStatusDot" class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true"></span>
             <span id="wsStatusText">WebSocket Live</span> &bull; Zero-Knowledge Isolation Barrier
           </p>
         </div>
       </div>
 
       <!-- Center Nav Tabs -->
-      <nav class="hidden md:flex items-center space-x-1 bg-slate-950/80 p-1 rounded-lg border border-slate-800 text-xs font-medium text-slate-400">
-        <a href="#sectionSetup" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800 transition">1. Setup</a>
-        <a href="#sectionPanel" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800 transition">2. Live Panel</a>
-        <a href="#sectionDebate" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800 transition">3. Debate Arena</a>
-        <a href="#sectionEvolution" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800 transition">4. Opinion Evolution</a>
-        <a href="#sectionAdjudication" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800 transition">5. Final Adjudication</a>
-        <a href="#sectionComparison" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800 transition">6. Comparison</a>
+      <nav class="hidden md:flex items-center space-x-1 bg-slate-950/80 p-1 rounded-lg border border-slate-800 text-xs font-medium text-slate-300" aria-label="Page Sections">
+        <a href="#sectionSetup" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800 transition focus:ring-2 focus:ring-indigo-400">1. Setup</a>
+        <a href="#sectionPanel" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800 transition focus:ring-2 focus:ring-indigo-400">2. Live Panel</a>
+        <a href="#sectionDebate" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800 transition focus:ring-2 focus:ring-indigo-400">3. Debate Arena</a>
+        <a href="#sectionEvolution" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800 transition focus:ring-2 focus:ring-indigo-400">4. Opinion Evolution</a>
+        <a href="#sectionAdjudication" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800 transition focus:ring-2 focus:ring-indigo-400">5. Final Adjudication</a>
+        <a href="#sectionComparison" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800 transition focus:ring-2 focus:ring-indigo-400">6. Comparison</a>
       </nav>
 
       <!-- Quick Candidate Switch & Action Button -->
       <div class="flex items-center space-x-3">
-        <div class="flex items-center bg-slate-950 border border-slate-800 rounded-lg p-1">
-          <button id="btnLoadStaff" class="px-3 py-1.5 text-xs font-semibold rounded-md bg-indigo-600 text-white shadow transition-all">
+        <div class="flex items-center bg-slate-950 border border-slate-800 rounded-lg p-1" role="tablist" aria-label="Candidate Profile Selection">
+          <button id="btnLoadStaff" type="button" role="tab" aria-selected="true" aria-controls="sectionSetup" class="px-3 py-1.5 text-xs font-semibold rounded-md bg-indigo-600 text-white shadow transition-all focus:ring-2 focus:ring-indigo-300">
             Alex Chen (Staff Strong)
           </button>
-          <button id="btnLoadBorderline" class="px-3 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-white hover:bg-slate-800 transition-all">
+          <button id="btnLoadBorderline" type="button" role="tab" aria-selected="false" aria-controls="sectionSetup" class="px-3 py-1.5 text-xs font-semibold rounded-md text-slate-300 hover:text-white hover:bg-slate-800 transition-all focus:ring-2 focus:ring-indigo-300">
             David Vance (Borderline Risk)
           </button>
         </div>
 
-        <button id="btnRunSimulation" class="flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-md shadow-indigo-500/25 transition-all transform active:scale-95">
-          <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
+        <button id="btnRunSimulation" type="button" aria-label="Run Multi-Agent Simulation" class="flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-md shadow-indigo-500/25 transition-all transform active:scale-95 focus:ring-2 focus:ring-indigo-300">
+          <i data-lucide="play" class="w-3.5 h-3.5 fill-current" aria-hidden="true"></i>
           <span>Run Simulation</span>
         </button>
       </div>
@@ -87,22 +90,22 @@
   </header>
 
   <!-- Main Container -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8" role="main">
 
     <!-- ========================================================================= -->
     <!-- SCREEN 1: SESSION SETUP & CONTEXT -->
     <!-- ========================================================================= -->
-    <section id="sectionSetup" class="space-y-4">
+    <section id="sectionSetup" class="space-y-4" aria-labelledby="headingSetup">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <div class="h-6 w-6 rounded-md bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-xs">
+          <div class="h-6 w-6 rounded-md bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs" aria-hidden="true">
             1
           </div>
-          <h2 class="text-base font-bold text-slate-100">Screen 1: Session Context & Ingestion</h2>
+          <h2 id="headingSetup" class="text-base font-bold text-slate-100">Screen 1: Session Context & Ingestion</h2>
         </div>
         <div class="flex items-center gap-2">
-          <span class="text-xs text-slate-400">System State:</span>
-          <span id="badgeSystemState" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-200 border border-slate-700">
+          <span class="text-xs text-slate-300">System State:</span>
+          <span id="badgeSystemState" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-100 border border-slate-700" aria-live="polite">
             READY
           </span>
         </div>
@@ -113,82 +116,82 @@
         <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-sm space-y-3">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
             <div class="flex items-center gap-2">
-              <i data-lucide="briefcase" class="w-4 h-4 text-indigo-400"></i>
-              <h3 class="text-sm font-bold text-white">Target Position & Competency Rubric</h3>
+              <i data-lucide="briefcase" class="w-4 h-4 text-indigo-400" aria-hidden="true"></i>
+              <h3 id="headingJD" class="text-sm font-bold text-white">Target Position & Competency Rubric</h3>
             </div>
-            <span id="jdRoleLevelBadge" class="text-[11px] font-bold px-2 py-0.5 rounded bg-indigo-950 text-indigo-300 border border-indigo-800">
+            <span id="jdRoleLevelBadge" class="text-[11px] font-bold px-2 py-0.5 rounded bg-indigo-950 text-indigo-200 border border-indigo-700">
               L6 / Staff
             </span>
           </div>
 
           <div>
             <h4 id="jdRoleTitle" class="text-base font-bold text-slate-100">Staff Distributed Systems Engineer</h4>
-            <p id="jdTeam" class="text-xs text-slate-400">Cloud Infrastructure & Data Engine Platform</p>
+            <p id="jdTeam" class="text-xs text-slate-300">Cloud Infrastructure & Data Engine Platform</p>
           </div>
 
           <div>
-            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Core Responsibilities</p>
-            <ul id="jdResponsibilitiesList" class="space-y-1 text-xs text-slate-300">
-              <li class="flex items-start gap-1.5"><span class="text-indigo-400 font-bold">&bull;</span> Architect globally replicated active-active distributed storage.</li>
-              <li class="flex items-start gap-1.5"><span class="text-indigo-400 font-bold">&bull;</span> Ensure 99.999% availability and data integrity under network partitions.</li>
-              <li class="flex items-start gap-1.5"><span class="text-indigo-400 font-bold">&bull;</span> Lead post-mortems and set engineering bar across teams.</li>
+            <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1.5">Core Responsibilities</p>
+            <ul id="jdResponsibilitiesList" class="space-y-1 text-xs text-slate-200">
+              <li class="flex items-start gap-1.5"><span class="text-indigo-400 font-bold" aria-hidden="true">&bull;</span> Architect globally replicated active-active distributed storage.</li>
+              <li class="flex items-start gap-1.5"><span class="text-indigo-400 font-bold" aria-hidden="true">&bull;</span> Ensure 99.999% availability and data integrity under network partitions.</li>
+              <li class="flex items-start gap-1.5"><span class="text-indigo-400 font-bold" aria-hidden="true">&bull;</span> Lead post-mortems and set engineering bar across teams.</li>
             </ul>
           </div>
 
           <div>
-            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Required Competencies</p>
+            <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1.5">Required Competencies</p>
             <div id="jdSkillsTags" class="flex flex-wrap gap-1.5">
-              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">Distributed Storage</span>
-              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">Raft / Paxos Consensus</span>
-              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">High Throughput Event Mesh</span>
-              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">Failure Mode Analysis</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">Distributed Storage</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">Raft / Paxos Consensus</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">High Throughput Event Mesh</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">Failure Mode Analysis</span>
             </div>
           </div>
         </div>
 
         <!-- Selected Candidate Profile Card -->
-        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-sm space-y-3 flex flex-col justify-between">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-sm space-y-3 flex flex-col justify-between" id="candidateProfile">
           <div class="space-y-3">
             <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
               <div class="flex items-center gap-2">
-                <i data-lucide="user-check" class="w-4 h-4 text-emerald-400"></i>
+                <i data-lucide="user-check" class="w-4 h-4 text-emerald-400" aria-hidden="true"></i>
                 <h3 class="text-sm font-bold text-white">Candidate Profile & Interview Corpus</h3>
               </div>
-              <span id="candidateExperienceBadge" class="text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+              <span id="candidateExperienceBadge" class="text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-950 text-emerald-200 border border-emerald-700">
                 10 Years Exp
               </span>
             </div>
 
             <div>
               <h4 id="candidateName" class="text-base font-bold text-white">Alex Chen</h4>
-              <p id="candidateTargetRole" class="text-xs text-slate-400">Target Role: Staff Distributed Systems Engineer</p>
+              <p id="candidateTargetRole" class="text-xs text-slate-300">Target Role: Staff Distributed Systems Engineer</p>
             </div>
 
-            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs text-slate-300 leading-relaxed">
-              <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Resume Summary</p>
+            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs text-slate-200 leading-relaxed">
+              <p class="text-[10px] font-bold text-slate-300 uppercase tracking-wider mb-1">Resume Summary</p>
               <p id="candidateResumeSummary">Former Staff Infrastructure Engineer at ScaleMesh. Led design and migration of global distributed message broker handling 2M+ ops/sec with 99.999% SLA.</p>
             </div>
 
             <div>
-              <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Claimed Technologies</p>
+              <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1.5">Claimed Technologies</p>
               <div id="candidateSkillsList" class="flex flex-wrap gap-1.5">
-                <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">Distributed Storage</span>
-                <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">Kafka</span>
-                <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">Raft Consensus</span>
-                <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">Go</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">Distributed Storage</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">Kafka</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">Raft Consensus</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">Go</span>
               </div>
             </div>
           </div>
 
           <!-- Transcript Drawer Launcher -->
           <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
-            <div class="flex items-center gap-1.5 text-xs text-slate-400">
-              <i data-lucide="file-text" class="w-3.5 h-3.5 text-indigo-400"></i>
+            <div class="flex items-center gap-1.5 text-xs text-slate-300">
+              <i data-lucide="file-text" class="w-3.5 h-3.5 text-indigo-400" aria-hidden="true"></i>
               <span id="transcriptTurnCount">8 Turns Indexed & Verified</span>
             </div>
-            <button id="btnToggleTranscript" class="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-medium px-3 py-1.5 rounded-lg transition-colors">
+            <button id="btnToggleTranscript" type="button" aria-expanded="false" aria-controls="transcriptDrawer" aria-label="Inspect Full Interview Transcript" class="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-medium px-3 py-1.5 rounded-lg transition-colors focus:ring-2 focus:ring-indigo-300">
               <span>Inspect Full Transcript</span>
-              <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5" aria-hidden="true"></i>
             </button>
           </div>
         </div>
@@ -198,20 +201,20 @@
     <!-- ========================================================================= -->
     <!-- SCREEN 2: LIVE PANEL (4 AGENTS) -->
     <!-- ========================================================================= -->
-    <section id="sectionPanel" class="space-y-4">
+    <section id="sectionPanel" class="space-y-4" aria-labelledby="headingPanel">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <div class="h-6 w-6 rounded-md bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-xs">
+          <div class="h-6 w-6 rounded-md bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs" aria-hidden="true">
             2
           </div>
           <div>
-            <h2 class="text-base font-bold text-slate-100">Screen 2: 4-Agent Live Panel & Independent Evaluation</h2>
-            <p class="text-xs text-slate-400">Phase 1: Pure independent evaluations executed in isolated context barriers before cross-agent deliberation</p>
+            <h2 id="headingPanel" class="text-base font-bold text-slate-100">Screen 2: 4-Agent Live Panel & Independent Evaluation</h2>
+            <p class="text-xs text-slate-300">Phase 1: Pure independent evaluations executed in isolated context barriers before cross-agent deliberation</p>
           </div>
         </div>
         
-        <div id="independenceCertBanner" class="hidden flex items-center gap-1.5 text-xs px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-700 text-emerald-300 font-semibold animate-fade-in">
-          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+        <div id="independenceCertBanner" class="hidden flex items-center gap-1.5 text-xs px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-600 text-emerald-200 font-semibold animate-fade-in" role="status" aria-live="polite">
+          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400" aria-hidden="true"></i>
           <span>4-Agent Independence Verified (Zero Cross-Agent Leakage)</span>
         </div>
       </div>
@@ -220,34 +223,34 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="agentCardsGrid">
         <!-- Agent 1: Technical Architect -->
         <div class="agent-card bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between relative overflow-hidden shadow-sm" id="card-technical_architect">
-          <div class="agent-pulse-bar absolute top-0 left-0 right-0 h-1 bg-blue-500 opacity-80"></div>
+          <div class="agent-pulse-bar absolute top-0 left-0 right-0 h-1 bg-blue-500 opacity-80" aria-hidden="true"></div>
           <div class="space-y-2.5">
             <div class="flex items-center justify-between">
-              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-950 text-blue-400 border border-blue-800">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-700">
                 Technical Architect
               </span>
-              <span class="agent-hash text-[10px] text-slate-500 font-mono">hash: #pending</span>
+              <span class="agent-hash text-[10px] text-slate-400 font-mono">hash: #pending</span>
             </div>
             <div>
-              <h4 class="font-bold text-white text-sm">Dr. Elena Vance</h4>
-              <p class="text-xs text-slate-400">System Architecture & Concurrency Rigor</p>
+              <h3 class="font-bold text-white text-sm">Dr. Elena Vance</h3>
+              <p class="text-xs text-slate-300">System Architecture & Concurrency Rigor</p>
             </div>
             
-            <div class="status-box text-xs text-slate-400 bg-slate-950 p-3 rounded-lg border border-slate-800 min-h-[90px] flex flex-col justify-between">
-              <span class="text-slate-500 italic">Waiting to evaluate independently...</span>
+            <div class="status-box text-xs text-slate-300 bg-slate-950 p-3 rounded-lg border border-slate-800 min-h-[90px] flex flex-col justify-between">
+              <span class="text-slate-400 italic">Waiting to evaluate independently...</span>
             </div>
           </div>
 
           <div class="mt-4 pt-3 border-t border-slate-800/80 space-y-1.5">
             <div class="flex items-center justify-between text-xs">
-              <span class="text-slate-400">Verdict:</span>
-              <strong class="agent-rec text-slate-400 font-bold">--</strong>
+              <span class="text-slate-300">Verdict:</span>
+              <strong class="agent-rec text-slate-300 font-bold">--</strong>
             </div>
             <div class="flex items-center justify-between text-xs">
-              <span class="text-slate-400">Confidence:</span>
-              <strong class="agent-conf text-slate-400 font-bold">--</strong>
+              <span class="text-slate-300">Confidence:</span>
+              <strong class="agent-conf text-slate-300 font-bold">--</strong>
             </div>
-            <div class="flex items-center justify-between text-[11px] text-slate-400">
+            <div class="flex items-center justify-between text-[11px] text-slate-300">
               <span>Evidence Cited:</span>
               <span class="agent-evidence-count font-mono font-semibold text-indigo-300">0 Quotes</span>
             </div>
@@ -256,34 +259,34 @@
 
         <!-- Agent 2: Culture & Leadership -->
         <div class="agent-card bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between relative overflow-hidden shadow-sm" id="card-culture_lead">
-          <div class="agent-pulse-bar absolute top-0 left-0 right-0 h-1 bg-emerald-500 opacity-80"></div>
+          <div class="agent-pulse-bar absolute top-0 left-0 right-0 h-1 bg-emerald-500 opacity-80" aria-hidden="true"></div>
           <div class="space-y-2.5">
             <div class="flex items-center justify-between">
-              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700">
                 Culture & Leadership
               </span>
-              <span class="agent-hash text-[10px] text-slate-500 font-mono">hash: #pending</span>
+              <span class="agent-hash text-[10px] text-slate-400 font-mono">hash: #pending</span>
             </div>
             <div>
-              <h4 class="font-bold text-white text-sm">Marcus Aurelius Vance</h4>
-              <p class="text-xs text-slate-400">Empathy, Ownership & Ambiguity</p>
+              <h3 class="font-bold text-white text-sm">Marcus Aurelius Vance</h3>
+              <p class="text-xs text-slate-300">Empathy, Ownership & Ambiguity</p>
             </div>
             
-            <div class="status-box text-xs text-slate-400 bg-slate-950 p-3 rounded-lg border border-slate-800 min-h-[90px] flex flex-col justify-between">
-              <span class="text-slate-500 italic">Waiting to evaluate independently...</span>
+            <div class="status-box text-xs text-slate-300 bg-slate-950 p-3 rounded-lg border border-slate-800 min-h-[90px] flex flex-col justify-between">
+              <span class="text-slate-400 italic">Waiting to evaluate independently...</span>
             </div>
           </div>
 
           <div class="mt-4 pt-3 border-t border-slate-800/80 space-y-1.5">
             <div class="flex items-center justify-between text-xs">
-              <span class="text-slate-400">Verdict:</span>
-              <strong class="agent-rec text-slate-400 font-bold">--</strong>
+              <span class="text-slate-300">Verdict:</span>
+              <strong class="agent-rec text-slate-300 font-bold">--</strong>
             </div>
             <div class="flex items-center justify-between text-xs">
-              <span class="text-slate-400">Confidence:</span>
-              <strong class="agent-conf text-slate-400 font-bold">--</strong>
+              <span class="text-slate-300">Confidence:</span>
+              <strong class="agent-conf text-slate-300 font-bold">--</strong>
             </div>
-            <div class="flex items-center justify-between text-[11px] text-slate-400">
+            <div class="flex items-center justify-between text-[11px] text-slate-300">
               <span>Evidence Cited:</span>
               <span class="agent-evidence-count font-mono font-semibold text-emerald-300">0 Quotes</span>
             </div>
@@ -292,34 +295,34 @@
 
         <!-- Agent 3: Hiring Manager -->
         <div class="agent-card bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between relative overflow-hidden shadow-sm" id="card-domain_specialist">
-          <div class="agent-pulse-bar absolute top-0 left-0 right-0 h-1 bg-amber-500 opacity-80"></div>
+          <div class="agent-pulse-bar absolute top-0 left-0 right-0 h-1 bg-amber-500 opacity-80" aria-hidden="true"></div>
           <div class="space-y-2.5">
             <div class="flex items-center justify-between">
-              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-950 text-amber-400 border border-amber-800">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-700">
                 Hiring Manager
               </span>
-              <span class="agent-hash text-[10px] text-slate-500 font-mono">hash: #pending</span>
+              <span class="agent-hash text-[10px] text-slate-400 font-mono">hash: #pending</span>
             </div>
             <div>
-              <h4 class="font-bold text-white text-sm">Priya Sharma</h4>
-              <p class="text-xs text-slate-400">Domain & Execution • Velocity & ROI</p>
+              <h3 class="font-bold text-white text-sm">Priya Sharma</h3>
+              <p class="text-xs text-slate-300">Domain & Execution • Velocity & ROI</p>
             </div>
             
-            <div class="status-box text-xs text-slate-400 bg-slate-950 p-3 rounded-lg border border-slate-800 min-h-[90px] flex flex-col justify-between">
-              <span class="text-slate-500 italic">Waiting to evaluate independently...</span>
+            <div class="status-box text-xs text-slate-300 bg-slate-950 p-3 rounded-lg border border-slate-800 min-h-[90px] flex flex-col justify-between">
+              <span class="text-slate-400 italic">Waiting to evaluate independently...</span>
             </div>
           </div>
 
           <div class="mt-4 pt-3 border-t border-slate-800/80 space-y-1.5">
             <div class="flex items-center justify-between text-xs">
-              <span class="text-slate-400">Verdict:</span>
-              <strong class="agent-rec text-slate-400 font-bold">--</strong>
+              <span class="text-slate-300">Verdict:</span>
+              <strong class="agent-rec text-slate-300 font-bold">--</strong>
             </div>
             <div class="flex items-center justify-between text-xs">
-              <span class="text-slate-400">Confidence:</span>
-              <strong class="agent-conf text-slate-400 font-bold">--</strong>
+              <span class="text-slate-300">Confidence:</span>
+              <strong class="agent-conf text-slate-300 font-bold">--</strong>
             </div>
-            <div class="flex items-center justify-between text-[11px] text-slate-400">
+            <div class="flex items-center justify-between text-[11px] text-slate-300">
               <span>Evidence Cited:</span>
               <span class="agent-evidence-count font-mono font-semibold text-amber-300">0 Quotes</span>
             </div>
@@ -328,34 +331,34 @@
 
         <!-- Agent 4: Bar Raiser & Risk Skeptic -->
         <div class="agent-card bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between relative overflow-hidden shadow-sm" id="card-bar_raiser">
-          <div class="agent-pulse-bar absolute top-0 left-0 right-0 h-1 bg-rose-500 opacity-80"></div>
+          <div class="agent-pulse-bar absolute top-0 left-0 right-0 h-1 bg-rose-500 opacity-80" aria-hidden="true"></div>
           <div class="space-y-2.5">
             <div class="flex items-center justify-between">
-              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-rose-950 text-rose-400 border border-rose-800">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-700">
                 Bar Raiser & Skeptic
               </span>
-              <span class="agent-hash text-[10px] text-slate-500 font-mono">hash: #pending</span>
+              <span class="agent-hash text-[10px] text-slate-400 font-mono">hash: #pending</span>
             </div>
             <div>
-              <h4 class="font-bold text-white text-sm">Kaelen Thorne</h4>
-              <p class="text-xs text-slate-400">Adversarial Risk Auditor & Veto Sentinel</p>
+              <h3 class="font-bold text-white text-sm">Kaelen Thorne</h3>
+              <p class="text-xs text-slate-300">Adversarial Risk Auditor & Veto Sentinel</p>
             </div>
             
-            <div class="status-box text-xs text-slate-400 bg-slate-950 p-3 rounded-lg border border-slate-800 min-h-[90px] flex flex-col justify-between">
-              <span class="text-slate-500 italic">Waiting to evaluate independently...</span>
+            <div class="status-box text-xs text-slate-300 bg-slate-950 p-3 rounded-lg border border-slate-800 min-h-[90px] flex flex-col justify-between">
+              <span class="text-slate-400 italic">Waiting to evaluate independently...</span>
             </div>
           </div>
 
           <div class="mt-4 pt-3 border-t border-slate-800/80 space-y-1.5">
             <div class="flex items-center justify-between text-xs">
-              <span class="text-slate-400">Verdict:</span>
-              <strong class="agent-rec text-slate-400 font-bold">--</strong>
+              <span class="text-slate-300">Verdict:</span>
+              <strong class="agent-rec text-slate-300 font-bold">--</strong>
             </div>
             <div class="flex items-center justify-between text-xs">
-              <span class="text-slate-400">Confidence:</span>
-              <strong class="agent-conf text-slate-400 font-bold">--</strong>
+              <span class="text-slate-300">Confidence:</span>
+              <strong class="agent-conf text-slate-300 font-bold">--</strong>
             </div>
-            <div class="flex items-center justify-between text-[11px] text-slate-400">
+            <div class="flex items-center justify-between text-[11px] text-slate-300">
               <span>Evidence Cited:</span>
               <span class="agent-evidence-count font-mono font-semibold text-rose-300">0 Quotes</span>
             </div>
@@ -367,21 +370,21 @@
     <!-- ========================================================================= -->
     <!-- SCREEN 3: DEBATE ARENA (VISUAL CENTERPIECE) -->
     <!-- ========================================================================= -->
-    <section id="sectionDebate" class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
+    <section id="sectionDebate" class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4" aria-labelledby="headingDebate">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
         <div class="flex items-center gap-2">
-          <div class="h-6 w-6 rounded-md bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs">
+          <div class="h-6 w-6 rounded-md bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold text-xs" aria-hidden="true">
             3
           </div>
           <div>
-            <h2 class="text-base font-bold text-slate-100">Screen 3: Multi-Round Structured Debate Arena</h2>
-            <p class="text-xs text-slate-400">Phase 2: Formal cross-examination with targeted challenges, defenses, and transcript evidence rebuttals</p>
+            <h2 id="headingDebate" class="text-base font-bold text-slate-100">Screen 3: Multi-Round Structured Debate Arena</h2>
+            <p class="text-xs text-slate-300">Phase 2: Formal cross-examination with targeted challenges, defenses, and transcript evidence rebuttals</p>
           </div>
         </div>
 
         <div class="flex items-center space-x-2">
           <div class="flex items-center bg-slate-950 border border-slate-800 rounded-lg p-0.5 text-[11px]">
-            <span class="px-2.5 py-1 font-semibold rounded bg-slate-800 text-slate-200" id="badgeActiveRound">
+            <span class="px-2.5 py-1 font-semibold rounded bg-slate-800 text-slate-100" id="badgeActiveRound" aria-live="polite">
               Round: Awaiting Start
             </span>
           </div>
@@ -389,25 +392,25 @@
       </div>
 
       <!-- Debate Progress Indicator -->
-      <div class="grid grid-cols-3 gap-2 text-center text-xs">
-        <div class="p-2 rounded-lg bg-slate-950 border border-slate-800" id="stepRound1">
-          <span class="font-bold text-slate-400 block text-[10px] uppercase">Round 1</span>
-          <span class="text-slate-300 font-medium">Divergence Mapping</span>
+      <div class="grid grid-cols-3 gap-2 text-center text-xs" role="tablist" aria-label="Debate Rounds">
+        <div class="p-2 rounded-lg bg-slate-950 border border-slate-800" id="stepRound1" role="tab" aria-selected="false">
+          <span class="font-bold text-slate-300 block text-[10px] uppercase">Round 1</span>
+          <span class="text-slate-200 font-medium">Divergence Mapping</span>
         </div>
-        <div class="p-2 rounded-lg bg-slate-950 border border-slate-800" id="stepRound2">
-          <span class="font-bold text-slate-400 block text-[10px] uppercase">Round 2</span>
-          <span class="text-slate-300 font-medium">Cross-Examination & Rebuttals</span>
+        <div class="p-2 rounded-lg bg-slate-950 border border-slate-800" id="stepRound2" role="tab" aria-selected="false">
+          <span class="font-bold text-slate-300 block text-[10px] uppercase">Round 2</span>
+          <span class="text-slate-200 font-medium">Cross-Examination & Rebuttals</span>
         </div>
-        <div class="p-2 rounded-lg bg-slate-950 border border-slate-800" id="stepRound3">
-          <span class="font-bold text-slate-400 block text-[10px] uppercase">Round 3</span>
-          <span class="text-slate-300 font-medium">Epistemic Calibration</span>
+        <div class="p-2 rounded-lg bg-slate-950 border border-slate-800" id="stepRound3" role="tab" aria-selected="false">
+          <span class="font-bold text-slate-300 block text-[10px] uppercase">Round 3</span>
+          <span class="text-slate-200 font-medium">Epistemic Calibration</span>
         </div>
       </div>
 
       <!-- Debate Discourse Arena Stream -->
-      <div id="debateStream" class="space-y-3.5 max-h-[460px] overflow-y-auto pr-2 custom-scrollbar">
-        <div class="text-center py-12 text-slate-500 text-xs space-y-2">
-          <i data-lucide="message-square" class="w-8 h-8 mx-auto text-slate-600"></i>
+      <div id="debateStream" class="space-y-3.5 max-h-[460px] overflow-y-auto pr-2 custom-scrollbar" role="region" aria-label="Debate Arguments Stream" tabindex="0">
+        <div class="text-center py-12 text-slate-400 text-xs space-y-2">
+          <i data-lucide="message-square" class="w-8 h-8 mx-auto text-slate-500" aria-hidden="true"></i>
           <p>Debate discourse will stream live in real time once Phase 1 evaluations complete.</p>
         </div>
       </div>
@@ -416,47 +419,47 @@
     <!-- ========================================================================= -->
     <!-- SCREEN 4: OPINION EVOLUTION & EPISTEMIC CALIBRATION -->
     <!-- ========================================================================= -->
-    <section id="sectionEvolution" class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
+    <section id="sectionEvolution" class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4" aria-labelledby="headingEvolution">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
         <div class="flex items-center gap-2">
-          <div class="h-6 w-6 rounded-md bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-xs">
+          <div class="h-6 w-6 rounded-md bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs" aria-hidden="true">
             4
           </div>
           <div>
-            <h2 class="text-base font-bold text-slate-100">Screen 4: Opinion Evolution & Epistemic Calibration</h2>
-            <p class="text-xs text-slate-400">Tracking confidence drift ($Initial \rightarrow Final$), formal concessions, and hardened positions following debate</p>
+            <h2 id="headingEvolution" class="text-base font-bold text-slate-100">Screen 4: Opinion Evolution & Epistemic Calibration</h2>
+            <p class="text-xs text-slate-300">Tracking confidence drift ($Initial \rightarrow Final$), formal concessions, and hardened positions following debate</p>
           </div>
         </div>
       </div>
 
       <div id="evolutionGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="text-center py-8 text-slate-500 text-xs col-span-full">
+        <div class="text-center py-8 text-slate-400 text-xs col-span-full">
           Opinion evolution will populate automatically after Round 3 debate calibration completes.
         </div>
       </div>
     </section>
 
     <!-- ========================================================================= -->
-    <!-- SCREEN 6: FINAL ADJUDICATION (DELPHI NON-AVERAGED SYNTHESIS) -->
+    <!-- SCREEN 5: FINAL ADJUDICATION (DELPHI NON-AVERAGED SYNTHESIS) -->
     <!-- ========================================================================= -->
-    <section id="sectionAdjudication" class="hidden bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-6">
+    <section id="sectionAdjudication" class="hidden bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-6" aria-labelledby="headingAdjudication">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
         <div class="flex items-center gap-2">
-          <div class="h-6 w-6 rounded-md bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">
+          <div class="h-6 w-6 rounded-md bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-xs" aria-hidden="true">
             5
           </div>
           <div>
-            <h2 class="text-base font-bold text-slate-100">Screen 5: Final Delphi Synthesis & Adjudication</h2>
-            <p class="text-xs text-slate-400">Synthesized on verified evidence strength, debate trajectory, confidence weighting, and Bar Raiser vetoes</p>
+            <h2 id="headingAdjudication" class="text-base font-bold text-slate-100">Screen 5: Final Delphi Synthesis & Adjudication</h2>
+            <p class="text-xs text-slate-300">Synthesized on verified evidence strength, debate trajectory, confidence weighting, and Bar Raiser vetoes</p>
           </div>
         </div>
 
         <div class="flex items-center gap-3">
           <div class="text-right">
-            <p class="text-[10px] text-slate-400 uppercase font-semibold">Calibrated Consensus</p>
-            <p id="synthesisConfidenceScore" class="text-xs font-bold text-emerald-400">89% Confidence</p>
+            <p class="text-[10px] text-slate-300 uppercase font-semibold">Calibrated Consensus</p>
+            <p id="synthesisConfidenceScore" class="text-xs font-bold text-emerald-300">89% Confidence</p>
           </div>
-          <div id="finalVerdictBadge" class="text-sm font-black px-3.5 py-1.5 rounded-lg uppercase tracking-wider bg-emerald-950 text-emerald-300 border border-emerald-700 shadow-md">
+          <div id="finalVerdictBadge" class="text-sm font-black px-3.5 py-1.5 rounded-lg uppercase tracking-wider bg-emerald-950 text-emerald-200 border border-emerald-600 shadow-md">
             STRONG_HIRE
           </div>
         </div>
@@ -467,50 +470,50 @@
         <!-- Left 2 Cols: Summary, Non-Averaging Logic, Strengths & Mitigations -->
         <div class="lg:col-span-2 space-y-4">
           <div class="bg-slate-950 border border-slate-800 rounded-lg p-4 space-y-1.5">
-            <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-              <i data-lucide="award" class="w-4 h-4 text-indigo-400"></i>
+            <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+              <i data-lucide="award" class="w-4 h-4 text-indigo-400" aria-hidden="true"></i>
               Executive Hiring Decision Summary
             </h3>
-            <p id="synthesisSummaryText" class="text-sm text-slate-200 leading-relaxed"></p>
+            <p id="synthesisSummaryText" class="text-sm text-slate-100 leading-relaxed"></p>
           </div>
 
           <!-- Non-Averaging Justification Callout -->
-          <div class="bg-indigo-950/40 border border-indigo-800/80 rounded-lg p-4 space-y-1.5">
+          <div class="bg-indigo-950/40 border border-indigo-700/80 rounded-lg p-4 space-y-1.5">
             <div class="flex items-center justify-between">
-              <h3 class="text-xs font-bold text-indigo-300 uppercase tracking-wider flex items-center gap-1.5">
-                <i data-lucide="shield-alert" class="w-4 h-4 text-indigo-400"></i>
+              <h3 class="text-xs font-bold text-indigo-200 uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="shield-alert" class="w-4 h-4 text-indigo-400" aria-hidden="true"></i>
                 Non-Averaging Justification Matrix (Delphi Adjudication)
               </h3>
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-900/60 text-indigo-200 border border-indigo-700">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-900/80 text-indigo-100 border border-indigo-600">
                 Score Averaging: Bypassed
               </span>
             </div>
-            <p id="nonAveragingRationaleText" class="text-xs text-indigo-200/90 leading-relaxed"></p>
+            <p id="nonAveragingRationaleText" class="text-xs text-indigo-100 leading-relaxed"></p>
           </div>
 
           <!-- Strengths & Mitigations Grid -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="bg-slate-950 border border-slate-800 rounded-lg p-3.5 space-y-2">
-              <h4 class="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
-                <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+              <h4 class="text-xs font-bold text-emerald-300 flex items-center gap-1.5">
+                <i data-lucide="check-circle-2" class="w-4 h-4" aria-hidden="true"></i>
                 Primary Strengths & Verified Evidence
               </h4>
-              <ul id="synthesisStrengthsList" class="space-y-1.5 text-xs text-slate-300"></ul>
+              <ul id="synthesisStrengthsList" class="space-y-1.5 text-xs text-slate-200"></ul>
             </div>
 
             <div class="bg-slate-950 border border-slate-800 rounded-lg p-3.5 space-y-2">
-              <h4 class="text-xs font-bold text-rose-400 flex items-center gap-1.5">
-                <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+              <h4 class="text-xs font-bold text-rose-300 flex items-center gap-1.5">
+                <i data-lucide="alert-triangle" class="w-4 h-4" aria-hidden="true"></i>
                 Critical Risks & Onboarding Mitigations
               </h4>
-              <ul id="synthesisRisksList" class="space-y-1.5 text-xs text-slate-300"></ul>
+              <ul id="synthesisRisksList" class="space-y-1.5 text-xs text-slate-200"></ul>
             </div>
           </div>
 
           <!-- Decisive Evidence Excerpts -->
           <div class="bg-slate-950 border border-slate-800 rounded-lg p-3.5 space-y-2">
-            <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-              <i data-lucide="file-check-2" class="w-4 h-4 text-indigo-400"></i>
+            <h4 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+              <i data-lucide="file-check-2" class="w-4 h-4 text-indigo-400" aria-hidden="true"></i>
               Decisive Transcript Evidence That Shaped Verdict
             </h4>
             <div id="decisiveEvidenceList" class="space-y-1.5"></div>
@@ -520,38 +523,38 @@
         <!-- Right Col: Calibrated Radar Chart & Dissent -->
         <div class="bg-slate-950 border border-slate-800 rounded-lg p-4 flex flex-col justify-between space-y-4">
           <div>
-            <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <i data-lucide="radar" class="w-4 h-4 text-indigo-400"></i>
+            <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <i data-lucide="radar" class="w-4 h-4 text-indigo-400" aria-hidden="true"></i>
               Calibrated Competency Dimensions
             </h3>
             <div class="h-60 relative flex items-center justify-center">
-              <canvas id="rubricRadarChart"></canvas>
+              <canvas id="rubricRadarChart" role="img" aria-label="Radar chart depicting calibrated scores across four competency dimensions"></canvas>
             </div>
           </div>
 
           <div id="dissentBox" class="pt-3 border-t border-slate-800 text-xs space-y-2">
-            <p class="font-bold text-slate-300 flex items-center gap-1.5">
-              <i data-lucide="git-pull-request-draft" class="w-3.5 h-3.5 text-amber-400"></i>
+            <p class="font-bold text-slate-200 flex items-center gap-1.5">
+              <i data-lucide="git-pull-request-draft" class="w-3.5 h-3.5 text-amber-300" aria-hidden="true"></i>
               Preserved Minority Dissent & Reservations:
             </p>
-            <div id="dissentItems" class="space-y-1.5 text-[11px] text-slate-400"></div>
+            <div id="dissentItems" class="space-y-1.5 text-[11px] text-slate-300"></div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ========================================================================= -->
-    <!-- SCREEN 7: CANDIDATE COMPARISON (SIDE-BY-SIDE ANALYSIS) -->
+    <!-- SCREEN 6: CANDIDATE COMPARISON (SIDE-BY-SIDE ANALYSIS) -->
     <!-- ========================================================================= -->
-    <section id="sectionComparison" class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-5">
+    <section id="sectionComparison" class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-5" aria-labelledby="headingComparison">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
         <div class="flex items-center gap-2">
-          <div class="h-6 w-6 rounded-md bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-xs">
+          <div class="h-6 w-6 rounded-md bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs" aria-hidden="true">
             6
           </div>
           <div>
-            <h2 class="text-base font-bold text-slate-100">Screen 6: Multi-Candidate Comparative Dossier</h2>
-            <p class="text-xs text-slate-400">Comparative assessment across distinct candidate archetypes (No simple average score leaderboard)</p>
+            <h2 id="headingComparison" class="text-base font-bold text-slate-100">Screen 6: Multi-Candidate Comparative Dossier</h2>
+            <p class="text-xs text-slate-300">Comparative assessment across distinct candidate archetypes (No simple average score leaderboard)</p>
           </div>
         </div>
       </div>
@@ -559,68 +562,68 @@
       <!-- Side-by-Side Comparison Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <!-- Candidate A Card -->
-        <div class="bg-slate-950 border border-emerald-900/60 rounded-xl p-4 space-y-3">
+        <div class="bg-slate-950 border border-emerald-900/80 rounded-xl p-4 space-y-3">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div>
-              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-950 text-emerald-200 border border-emerald-700">
                 Candidate A • Strong Hire Archetype
               </span>
               <h3 class="text-base font-bold text-white mt-1">Alex Chen</h3>
             </div>
-            <span class="text-xs font-black px-2.5 py-1 rounded bg-emerald-950 text-emerald-300 border border-emerald-700">
+            <span class="text-xs font-black px-2.5 py-1 rounded bg-emerald-950 text-emerald-200 border border-emerald-600">
               HIRE / STRONG HIRE
             </span>
           </div>
 
           <div class="space-y-2 text-xs">
             <div>
-              <strong class="text-slate-300">Technical Depth:</strong>
-              <p class="text-slate-400">Mastery of partitioned Kafka topics, Raft odd quorums, and idempotent consumer deduplication.</p>
+              <strong class="text-slate-200">Technical Depth:</strong>
+              <p class="text-slate-300">Mastery of partitioned Kafka topics, Raft odd quorums, and idempotent consumer deduplication.</p>
             </div>
             <div>
-              <strong class="text-slate-300">Leadership & Velocity:</strong>
-              <p class="text-slate-400">Blameless spikes, collaborative alignment, and pragmatic MVP scoping before async queuing.</p>
+              <strong class="text-slate-200">Leadership & Velocity:</strong>
+              <p class="text-slate-300">Blameless spikes, collaborative alignment, and pragmatic MVP scoping before async queuing.</p>
             </div>
             <div>
-              <strong class="text-slate-300">Bar Raiser Audit:</strong>
-              <p class="text-slate-400">Conceded edge-case multi-region partition vulnerability; remediated via paired onboarding review.</p>
+              <strong class="text-slate-200">Bar Raiser Audit:</strong>
+              <p class="text-slate-300">Conceded edge-case multi-region partition vulnerability; remediated via paired onboarding review.</p>
             </div>
             <div>
-              <strong class="text-slate-300">Decisive Evidence:</strong>
+              <strong class="text-slate-200">Decisive Evidence:</strong>
               <p class="text-indigo-300 font-mono text-[11px]">Turn 4: "For audit logs, durability and ordering are non-negotiable. I would configure Kafka with acks=all..."</p>
             </div>
           </div>
         </div>
 
         <!-- Candidate B Card -->
-        <div class="bg-slate-950 border border-rose-900/60 rounded-xl p-4 space-y-3">
+        <div class="bg-slate-950 border border-rose-900/80 rounded-xl p-4 space-y-3">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div>
-              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-rose-950 text-rose-200 border border-rose-700">
                 Candidate B • Borderline / Risk Audit
               </span>
               <h3 class="text-base font-bold text-white mt-1">David Vance</h3>
             </div>
-            <span class="text-xs font-black px-2.5 py-1 rounded bg-rose-950 text-rose-300 border border-rose-700">
+            <span class="text-xs font-black px-2.5 py-1 rounded bg-rose-950 text-rose-200 border border-rose-600">
               BORDERLINE AUDIT
             </span>
           </div>
 
           <div class="space-y-2 text-xs">
             <div>
-              <strong class="text-slate-300">Technical Depth:</strong>
-              <p class="text-slate-400">Relied on default Redis Sentinel assumptions; lacked custom cross-region conflict resolution.</p>
+              <strong class="text-slate-200">Technical Depth:</strong>
+              <p class="text-slate-300">Relied on default Redis Sentinel assumptions; lacked custom cross-region conflict resolution.</p>
             </div>
             <div>
-              <strong class="text-slate-300">Leadership & Velocity:</strong>
-              <p class="text-slate-400">Shipped Spring Boot wrappers, but attributed cluster reliability entirely to external platform teams.</p>
+              <strong class="text-slate-200">Leadership & Velocity:</strong>
+              <p class="text-slate-300">Shipped Spring Boot wrappers, but attributed cluster reliability entirely to external platform teams.</p>
             </div>
             <div>
-              <strong class="text-slate-300">Bar Raiser Audit:</strong>
-              <p class="text-slate-400">Forensic probing revealed unverified claims regarding personal contribution vs infrastructure team.</p>
+              <strong class="text-slate-200">Bar Raiser Audit:</strong>
+              <p class="text-slate-300">Forensic probing revealed unverified claims regarding personal contribution vs infrastructure team.</p>
             </div>
             <div>
-              <strong class="text-slate-300">Decisive Evidence:</strong>
+              <strong class="text-slate-200">Decisive Evidence:</strong>
               <p class="text-rose-300 font-mono text-[11px]">Turn 8: "Well, my team mostly wrote the REST wrapper endpoints... The underlying cluster was set up by another team..."</p>
             </div>
           </div>
@@ -631,55 +634,63 @@
   </main>
 
   <!-- ========================================================================= -->
+  <!-- FOOTER -->
+  <!-- ========================================================================= -->
+  <footer class="border-t border-slate-800/80 mt-12 py-6 text-center text-xs text-slate-400" role="contentinfo">
+    <p>Multi-Agent AI Interview Panel Simulator &bull; PromptWars 2026</p>
+    <p class="text-[11px] text-slate-500 mt-1">Built with Zero-Knowledge Isolation Barrier & Delphi Non-Averaged Synthesis Engine</p>
+  </footer>
+
+  <!-- ========================================================================= -->
   <!-- SCREEN 5: EVIDENCE INSPECTOR (MODAL & DRAWER) -->
   <!-- ========================================================================= -->
   
   <!-- Interactive Transcript Slide-over Drawer -->
-  <div id="transcriptDrawer" class="fixed inset-y-0 right-0 max-w-lg w-full bg-slate-900 border-l border-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+  <aside id="transcriptDrawer" role="region" aria-label="Interview Transcript Explorer" class="fixed inset-y-0 right-0 max-w-lg w-full bg-slate-900 border-l border-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
     <div class="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950">
       <div class="flex items-center gap-2">
-        <i data-lucide="file-text" class="w-4 h-4 text-indigo-400"></i>
+        <i data-lucide="file-text" class="w-4 h-4 text-indigo-400" aria-hidden="true"></i>
         <h3 class="font-bold text-sm text-white">Interview Transcript Corpus Explorer</h3>
       </div>
-      <button id="btnCloseDrawer" class="p-1 rounded text-slate-400 hover:text-white hover:bg-slate-800 transition">
-        <i data-lucide="x" class="w-5 h-5"></i>
+      <button id="btnCloseDrawer" type="button" aria-label="Close Interview Transcript Explorer" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition focus:ring-2 focus:ring-indigo-300">
+        <i data-lucide="x" class="w-5 h-5" aria-hidden="true"></i>
       </button>
     </div>
 
-    <div class="p-3 bg-slate-900 border-b border-slate-800 text-xs text-slate-400 flex items-center justify-between">
+    <div class="p-3 bg-slate-900 border-b border-slate-800 text-xs text-slate-300 flex items-center justify-between">
       <span>Click any citation pill to spotlight and auto-scroll to the exact turn.</span>
       <span class="text-[10px] font-mono text-indigo-300">Double-Pass Verified</span>
     </div>
 
-    <div id="transcriptList" class="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar"></div>
-  </div>
+    <div id="transcriptList" class="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar" tabindex="0" role="feed" aria-label="Transcript turns list"></div>
+  </aside>
 
   <!-- Evidence Citation Modal / Inspector -->
-  <div id="citationModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-700 rounded-xl max-w-lg w-full p-5 space-y-4 shadow-2xl animate-fade-in">
+  <div id="citationModal" role="dialog" aria-modal="true" aria-labelledby="citModalVerifiedBadge" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-xl max-w-lg w-full p-5 space-y-4 shadow-2xl animate-fade-in" role="document">
       <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
         <div class="flex items-center gap-2">
-          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
-          <span class="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800" id="citModalVerifiedBadge">
+          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400" aria-hidden="true"></i>
+          <h3 class="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-950 text-emerald-200 border border-emerald-700" id="citModalVerifiedBadge">
             VERIFIED EVIDENCE (100%)
-          </span>
+          </h3>
         </div>
-        <button id="btnCloseCitModal" class="text-slate-400 hover:text-white">
-          <i data-lucide="x" class="w-4 h-4"></i>
+        <button id="btnCloseCitModal" type="button" aria-label="Close Evidence Inspector Modal" class="p-1 rounded text-slate-400 hover:text-white hover:bg-slate-800 transition focus:ring-2 focus:ring-indigo-300">
+          <i data-lucide="x" class="w-4 h-4" aria-hidden="true"></i>
         </button>
       </div>
 
       <div class="space-y-1">
-        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Claim Supported:</p>
+        <p class="text-[11px] font-bold text-slate-300 uppercase tracking-wider">Claim Supported:</p>
         <p id="citModalClaim" class="text-sm font-semibold text-white"></p>
       </div>
 
       <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800 space-y-1">
-        <p class="text-[11px] font-bold text-slate-400" id="citModalTurnSpeaker">Turn 2 (Candidate):</p>
+        <p class="text-[11px] font-bold text-slate-300" id="citModalTurnSpeaker">Turn 2 (Candidate):</p>
         <p id="citModalQuote" class="text-xs text-indigo-200 italic font-mono leading-relaxed"></p>
       </div>
 
-      <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2.5 rounded border border-slate-800" id="citModalNotes"></div>
+      <div class="text-[11px] text-slate-300 bg-slate-950/60 p-2.5 rounded border border-slate-800" id="citModalNotes"></div>
     </div>
   </div>
 

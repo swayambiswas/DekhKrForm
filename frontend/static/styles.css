@@ -1,3 +1,16 @@
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 /* Custom scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
@@ -7,11 +20,26 @@
   background: #090d16;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #475569;
   border-radius: 4px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #64748b;
+}
+
+/* Accessible focus visible indicators */
+*:focus-visible {
+  outline: 2px solid #818cf8 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.3) !important;
+}
+
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible,
+[role="tab"]:focus-visible {
+  outline: 2px solid #a5b4fc !important;
+  outline-offset: 2px !important;
 }
 
 /* Animations */
@@ -35,9 +63,9 @@
 
 /* Interactive elements */
 .turn-highlight {
-  background-color: rgba(99, 102, 241, 0.2) !important;
-  border-color: #818cf8 !important;
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.35);
+  background-color: rgba(99, 102, 241, 0.25) !important;
+  border-color: #a5b4fc !important;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -54,26 +82,26 @@
   transform: translateY(0);
 }
 
-/* Stance badge styles */
+/* Stance badge styles with WCAG AA compliant contrast */
 .badge-challenge {
-  background-color: rgba(225, 29, 72, 0.15);
-  color: #fb7185;
-  border: 1px solid rgba(225, 29, 72, 0.4);
+  background-color: rgba(225, 29, 72, 0.2);
+  color: #fda4af;
+  border: 1px solid rgba(244, 63, 94, 0.5);
 }
 .badge-defend {
-  background-color: rgba(16, 185, 129, 0.15);
-  color: #34d399;
-  border: 1px solid rgba(16, 185, 129, 0.4);
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
+  border: 1px solid rgba(52, 211, 153, 0.5);
 }
 .badge-clarify {
-  background-color: rgba(14, 165, 233, 0.15);
-  color: #38bdf8;
-  border: 1px solid rgba(14, 165, 233, 0.4);
+  background-color: rgba(14, 165, 233, 0.2);
+  color: #7dd3fc;
+  border: 1px solid rgba(56, 189, 248, 0.5);
 }
 .badge-concede {
-  background-color: rgba(245, 158, 11, 0.15);
-  color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.4);
+  background-color: rgba(245, 158, 11, 0.2);
+  color: #fcd34d;
+  border: 1px solid rgba(251, 191, 36, 0.5);
 }
 
 /* Nav Link Active */
